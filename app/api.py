@@ -15,7 +15,7 @@ class ZakupkiAPI:
         with WebClient() as Session:
             if XMLResponse := Session.Fetch(url):
                 XMLDict: dict = xmltodict.parse(XMLResponse.Content)
-                return XMLDict[tuple(XMLDict.keys())[0]]["commonInfo"]["publishDTInEIS"]
+                return XMLDict[tuple(XMLDict.keys())[0]].get("commonInfo", {}).get("publishDTInEIS")
 
         return None
 
